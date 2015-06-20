@@ -1,0 +1,38 @@
+init(<prog_data>)
+
+get_absolute_path(argv1)
+	-->get_dirpath+argv1 or -->absoolute_dirpath
+	
+get_manifest(<absolute_dirpath>)
+	-->pObj manifest or exit()
+	
+read_manifest(<manifest pObj>,<prog_data>)
+	-->set prog_data with manifest or exit 
+	
+exec_manifest(<absolute_dirpath>,<prog_data>)
+	-->set_priority
+	-->load lib
+	-->load handler
+	-->set programme name
+	-->load main_obj
+	
+onload_main_obj(<prog_data>)
+
+start_handler(<prog_data>)
+	-->threads
+	
+onrun_main_obj(<prog_data>)
+	-->on run or infinit run or timed run
+
+onvoid_main_obj(<prog_data>)
+	-->
+
+void(<prog_data>)
+	
+	---libs----
+lib_runtime
+
+lib_socket
+
+
+
