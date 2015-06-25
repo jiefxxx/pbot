@@ -1,6 +1,5 @@
 #ifndef DEF_I2C
-#define DEF_I2
-
+#define DEF_I2C
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
