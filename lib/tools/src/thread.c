@@ -1,6 +1,6 @@
 #include<tools/thread.h>
 
-struct Thread* start_thread(void*(*sroutine)(void *),void* data){
+struct Thread* start_thread(void*(*routine)(void *),void* data){
 	struct Thread* thread = (struct Thread*)malloc(sizeof(struct Thread));
 	thread->data = data;
 	thread->state = 0;
@@ -15,8 +15,8 @@ struct Thread* start_thread(void*(*sroutine)(void *),void* data){
 }
 
 void* join_thread(struct Thread* thread){
-	void* thread_return;
-	pthread_join (thread,*thread_return);
+	void* thread_return = NULL;
+	pthread_join(thread->thread,thread_return);
 	free(thread);
 	return thread_return;
 }

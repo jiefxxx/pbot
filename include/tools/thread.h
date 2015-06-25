@@ -7,7 +7,7 @@
 struct Thread{
 	void* data;
 	int state;
-	pthread_t* thread;
+	pthread_t thread;
 	pthread_mutex_t mutex;
 };
 struct Thread* start_thread(void*(*routine)(void *),void* data);
