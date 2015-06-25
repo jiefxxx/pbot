@@ -15,8 +15,8 @@ struct Thread* start_thread(void*(*routine)(void *),void* data){
 }
 
 void* join_thread(struct Thread* thread){
-	void* thread_return = NULL;
+	void** thread_return = NULL;
 	pthread_join(thread->thread,thread_return);
 	free(thread);
-	return thread_return;
+	return *thread_return;
 }
