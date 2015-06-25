@@ -27,7 +27,6 @@ struct Psocket{
 struct Pmessage{
 	int type;
 	int len;
-	void* data;
 };
 
 struct Client{

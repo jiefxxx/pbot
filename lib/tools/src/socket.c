@@ -137,13 +137,13 @@ struct Psocket* init_Psocket(int type,int server,int port,char* addr){
 	return ps;
 }
 //work on it.... 
-int send_Psocket(struct Psocket* ps,struct Pmessage message){
+int send_Psocket(struct Psocket* ps,struct Pmessage message,void* data){
 	if(ps->server){
 		return -2;
 	}
 	void* mes = malloc(sizeof(struct Pmessage)+message.len);
 	memcpy(mes,&message,sizeof(struct Pmessage));
-	memcpy(mes+sizeof(struct Pmessage),message.data,message.len);
+	memcpy(mes+sizeof(struct Pmessage),data,message.len);
 	int len = sizeof(struct Pmessage)+message.len;
 	int ret;
 	switch(ps->type){
