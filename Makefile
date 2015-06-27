@@ -1,7 +1,8 @@
 
-all: libtools
+all: libtools libi2c
 
 libtools:
-	cd lib/tools
-	make
-	cd ../../
+	cd lib/tools/ && $(MAKE)
+	
+libi2c:
+	cd lib

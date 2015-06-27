@@ -27,6 +27,7 @@ struct Psocket{
 struct Pmessage{
 	int type;
 	int len;
+	void* recev_sockaddr;
 };
 
 struct Client{

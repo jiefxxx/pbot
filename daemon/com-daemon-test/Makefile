@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS= -O3 -I../../include -D_REENTRANT
-LDFLAGS= -lpthread -lm -lc -ltools -D_REENTRANT
+LDFLAGS= -L../../lib -lm -lpthread  -lc -ltools -D_REENTRANT
 EXEC=pbot_com_daemon
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)

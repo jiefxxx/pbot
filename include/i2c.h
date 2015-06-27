@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #define I2C_FILE "/dev/i2c-1"
 
 int i2c_init(int addr);
