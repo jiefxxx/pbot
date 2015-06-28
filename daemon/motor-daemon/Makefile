@@ -7,10 +7,9 @@ SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
 
 
-all: $(EXEC)
-	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+all: $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
-motor_api_daemon: $(OBJ)
+$(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC): $(OBJ)
 	@echo $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 	@echo "****END***"

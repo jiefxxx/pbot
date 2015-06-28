@@ -6,17 +6,16 @@ EXEC=pbot_com_daemon_test
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
 
+all: $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+	@echo "END-->"$(EXEC)
 
-all: $(EXEC)
-	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+$(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC): $(OBJ)
+	@echo "->"$@
+	@@$(CC) -o $@ $^ $(LDFLAGS)
 
-pbot_com_daemon_test: $(OBJ)
-	@echo $@
-	@$(CC) -o $@ $^ $(LDFLAGS)
-	@echo "****END***"
 
 %.o: %.c
-	@echo $@
+	@echo "-->"$@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
@@ -26,10 +25,10 @@ remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
 
 clean:
-	@rm -rf $(OBJ)
+	rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+	rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove

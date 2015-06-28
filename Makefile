@@ -14,22 +14,27 @@ export ROOT_DIR BUILD_DIR
 export LIB_INSTALL_PATH DAEMON_INSTALL_PATH
 export MCFLAGS MLDFLAGS
 
+MAKEFLAGS += --no-print-directory
+
+export MAKEFLAGS
+
 all:
-	$(MAKE) libs
-	$(MAKE) daemons
+	@$(MAKE) libs
+	@$(MAKE) daemons
+	@echo "################################# compil complete ##########################"
 
 install:
-	sudo $(MAKE) install_libs
-	sudo $(MAKE) install_daemons
-
-test:
-	echo $(root_dir)
+	@sudo $(MAKE) install_libs
+	@sudo $(MAKE) install_daemons
+	@echo "################################# install complete ##########################"
 
 libs:
+	@echo "---->libs"
 	@cd ./lib && $(MAKE)
 	@echo "################################# COMPIL LIB COMPLETE ###################"
 
 daemons:
+	@echo "---->daemons"
 	@cd ./daemon && $(MAKE)
 	@echo "################################# COMPIL DAEMON COMPLETE ###################"
 

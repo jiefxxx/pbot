@@ -6,16 +6,16 @@ SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
 
 
-all: $(EXEC)
-	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+all: $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+	@echo "END-->"$(EXEC)
 
-magn_api_daemon: $(OBJ)
-	@echo $@
-	@$(CC) -o $@ $^ $(LDFLAGS)
-	@echo "****END***"
+$(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC): $(OBJ)
+	@echo "->"$@
+	@@$(CC) -o $@ $^ $(LDFLAGS)
+
 
 %.o: %.c
-	@echo $@
+	@echo "-->"$@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
@@ -25,10 +25,10 @@ remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
 
 clean:
-	@rm -rf $(OBJ)
+	rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
+	rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove
