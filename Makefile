@@ -7,7 +7,7 @@ all:
 libs:
 	@cd ./lib && $(MAKE)
 	@echo "################################# COMPIL LIB COMPLETE ###################"
-
+	
 daemons:
 	@cd ./daemon && $(MAKE)
 	@echo "################################# COMPIL DAEMON COMPLETE ###################"
@@ -27,3 +27,7 @@ clean:
 mrproper:
 	@cd ./daemon && $(MAKE) mrproper
 	@cd ./lib && $(MAKE) mrproper
+
+remove:
+	@cd ./daemon && $(MAKE) remove
+	@cd ./lib && $(MAKE) remove

@@ -2,8 +2,9 @@ CC=gcc
 CFLAGS= -Wall -O3 -fPIC -I../../include -I/usr/include/python2.7
 LDFLAGS= -L../ -li2c_dev -ltools -lpython2.7
 EXEC=libmotor.so
-SRC = $(wildcard src/*.c) 
+SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
+INSTALL_PATH = /lib
 
 all: $(EXEC)
 
@@ -16,7 +17,11 @@ libmotor.so: $(OBJ)
 	@echo $@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: clean mrproper
+install:
+	cp $(EXEC) $(INSTALL_PATH)
+
+remove:
+	rm -rf $(INSTALL_PATH)/$(EXEC)
 
 clean:
 	@rm -rf $(OBJ)
@@ -24,3 +29,5 @@ clean:
 mrproper: clean
 	@rm -rf $(EXEC)
 
+
+.PHONY: clean mrproper install remove

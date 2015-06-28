@@ -4,12 +4,9 @@ LDFLAGS= -lc
 EXEC=libtools.so
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
+INSTALL_PATH = /lib
 
 all: $(EXEC)
-
-install:
-	@cp *.so /lib
-	@ldconfig
 
 libtools.so: $(OBJ)
 	@echo $@
@@ -22,8 +19,17 @@ libtools.so: $(OBJ)
 
 .PHONY: clean mrproper
 
+install:
+	cp $(EXEC) $(INSTALL_PATH)
+
+remove:
+	rm -rf $(INSTALL_PATH)/$(EXEC)
+
 clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
 	@rm -rf $(EXEC)
+
+
+.PHONY: clean mrproper install remove

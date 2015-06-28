@@ -32,3 +32,13 @@ clean:
 	#cd ./gyro-daemon && $(MAKE) clean
 	cd ./magn-daemon && $(MAKE) clean
 	cd ./motor-daemon && $(MAKE) clean
+
+remove:
+	#cd ./accel-daemon && $(MAKE) remove
+	cd ./com-daemon && $(MAKE) remove
+	cd ./com-daemon-test && $(MAKE) remove
+	#cd ./gyro-daemon && $(MAKE) remove
+	cd ./magn-daemon && $(MAKE) remove
+	cd ./motor-daemon && $(MAKE) remove
+
+.PHONY: clean mrproper install remove

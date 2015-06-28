@@ -4,11 +4,9 @@ LDFLAGS= -lc
 EXEC=libi2c_dev.so
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
+INSTALL_PATH = /lib
 
 all: $(EXEC)
-
-install:
-	@cp *.so /lib
 
 libi2c_dev.so: $(OBJ)
 	@echo $@
@@ -19,10 +17,17 @@ libi2c_dev.so: $(OBJ)
 	@echo $@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: clean mrproper
+install:
+	cp $(EXEC) $(INSTALL_PATH)
+
+remove:
+	rm -rf $(INSTALL_PATH)/$(EXEC)
 
 clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
 	@rm -rf $(EXEC)
+
+
+.PHONY: clean mrproper install remove
