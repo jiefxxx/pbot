@@ -25,7 +25,7 @@ pbot is a standardized API integration for controling robot;
   - work on fedora, pidora, debian, raspbian.
 
 #install:
-...
+'''
   make
   make install
-...
+'''
