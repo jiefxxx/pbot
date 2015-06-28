@@ -24,6 +24,7 @@ install:
 
 remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
+	ldconfig
 
 clean:
 	@rm -rf $(OBJ)
