@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	bp.flag = 0;
 	bp.id = 0;
 	while(1){
-		if(write_udpSocket(socket,o,&bp,"blablabla")==NULL) {
+		if(write_udpSocket(socket,o,&bp,"blablabla")==-1) {
 			break;
 		};
 	}

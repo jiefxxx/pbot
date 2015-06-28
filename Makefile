@@ -1,31 +1,29 @@
 
 
 all:
-	@(cd ./lib && $(MAKE) )
-		@(echo "################################# COMPIL LIB COMPLETE ###################")
-	@(cd ./lib && $(MAKE) install)
-	@(echo "install lib complete")
-	@(cd ./daemon && $(MAKE) )
-	@(echo "################################# COMPIL DAEMON COMPLETE ###################")
-	@(cd ./daemon && $(MAKE) install)
-	@(echo "install daemon complete")
+	$(MAKE) libs
+	$(MAKE) daemons
 
 libs:
-	@(cd ./lib && $(MAKE) )
-	@(echo "################################# COMPIL LIB COMPLETE ###################")
+	@cd ./lib && $(MAKE)
+	@echo "################################# COMPIL LIB COMPLETE ###################"
 
 daemons:
-	@(cd ./lib && $(MAKE) )
-	@(echo "################################# COMPIL DAEMON COMPLETE ###################")
+	@cd ./daemon && $(MAKE)
+	@echo "################################# COMPIL DAEMON COMPLETE ###################"
 
-install_lib:
-	@(cd ./lib && $(MAKE) install)
-	@(echo "install lib complete")
+install_libs:
+	@cd ./lib && $(MAKE) install
+	@echo "################################# INSTALL LIB COMPLETE ###################"
+
+install_daemons:
+	@cd ./daemon && $(MAKE) install
+	@echo "################################# INSTALL DAEMON COMPLETE ###################"
 
 clean:
-	(cd ./daemon && $(MAKE) clean)
-	(cd ./lib && $(MAKE) clean)
+	@cd ./daemon && $(MAKE) clean
+	@cd ./lib && $(MAKE) clean
 
 mrproper:
-	(cd ./daemon && $(MAKE) mrproper)
-	(cd ./lib && $(MAKE) mrproper)
+	@cd ./daemon && $(MAKE) mrproper
+	@cd ./lib && $(MAKE) mrproper

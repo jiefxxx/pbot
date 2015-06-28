@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS= -O3 -I../../include -D_REENTRANT
-LDFLAGS= -L../../lib -li2c_dev -lm -lc -ltools -D_REENTRANT
+LDFLAGS= -lpthread -li2c_dev -lm -lc -ltools -D_REENTRANT
 EXEC=magn_api_daemon
-SRC = $(wildcard src/*.c) 
+SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)
@@ -18,9 +18,11 @@ magn_api_daemon: $(OBJ)
 
 .PHONY: clean mrproper
 
+install:
+		@cp $(EXEC) /bin/
+
 clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
 	@rm -rf $(EXEC)
-

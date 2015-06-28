@@ -18,6 +18,9 @@ pbot_com_daemon: $(OBJ)
 
 .PHONY: clean mrproper
 
+install:
+		@cp $(EXEC) /bin/
+
 clean:
 	@rm -rf $(OBJ)
 
