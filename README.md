@@ -18,12 +18,14 @@ pbot is a standardized API integration for controling robot;
 | /pbot-interpreter         | interpreter python (working on) |
 
 #Dependences:
-  *lib i2c and driver i2c*
-  *pthreads*
-  *(wiring pi)(currently not implenmeted)*
+  * lib i2c and driver i2c
+  * Pthreads
+  * (wiring pi)(currently not implenmeted)
 
-  work on fedora, pidora, debian, raspbian.
+  - work on fedora, pidora, debian, raspbian.
 
 #install:
+...
   make
   make install
+...
