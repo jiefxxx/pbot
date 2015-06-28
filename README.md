@@ -3,6 +3,7 @@
 #Description
 pbot is a standardized API integration for controling robot;
 
+#Path tree
 | Path | Description          |
 | ------------- | ----------- |
 | /build                    | Store exe in compilation time |
