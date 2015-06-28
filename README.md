@@ -3,10 +3,12 @@
 pbot is a standardized API integration for controling robot;
 
 Path Tree
-/
--->/build -->where all de exe are build
 
--->/daemon -->where all de daemon source are
+/
+
+-->/build -->where all  exe are build
+
+-->/daemon -->where all  daemon source are
   -->pbot_com_daemon --> daemon communication net
   -->pbot_motor_daemon --> daemon control/flux(working on) motor
   -->pbot_magn_daemon --> daemon flux magn
