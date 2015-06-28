@@ -1,15 +1,15 @@
 CC=gcc
-CFLAGS= -Wall -O3 -fPIC -I../../include 
-LDFLAGS= -lc 
+CFLAGS= -Wall -O3 -fPIC -I../../include
+LDFLAGS= -lc
 EXEC=libi2c_dev.so
-SRC = $(wildcard src/*.c) 
+SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)
 
 install:
-	@cp *.so ../
-	
+	@cp *.so /lib
+
 libi2c_dev.so: $(OBJ)
 	@echo $@
 	@$(CC) -Wall -shared -Wl,-soname,$@ -o $@ $^ $(LDFLAGS)
@@ -26,4 +26,3 @@ clean:
 
 mrproper: clean
 	@rm -rf $(EXEC)
-
