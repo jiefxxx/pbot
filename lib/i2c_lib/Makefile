@@ -1,12 +1,14 @@
-CC=gcc
-CFLAGS= -Wall -O3 -fPIC -I../../include
-LDFLAGS= -lc
+CFLAGS= $(LCFLAGS)
+LDFLAGS= $(LLDFLAGS)
+
 EXEC=libi2c_dev.so
+
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
-INSTALL_PATH = /lib
+
 
 all: $(EXEC)
+	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 libi2c_dev.so: $(OBJ)
 	@echo $@
@@ -18,17 +20,16 @@ libi2c_dev.so: $(OBJ)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
-	cp $(EXEC) $(INSTALL_PATH)
+	cp $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC) $(INSTALL_PATH)
 
 remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
-	ldconfig
 
 clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(EXEC)
+	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove

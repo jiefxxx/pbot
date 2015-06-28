@@ -1,5 +1,10 @@
+INSTALL_PATH = $(DAEMON_INSTALL_PATH)
+
+DCFLAGS= $(MCFLAGS) -Wall -O3 -I../../include -D_REENTRANT
+DLDFLAGS= $(MLDFLAGS) -L$(ROOT_DIR)$(BUILD_DIR)$(LIB_INSTALL_PATH) -lm -lc -ltools -D_REENTRANT
 
 
+export DCFLAGS DLDFLAGS INSTALL_PATH
 
 all:
 	#cd ./accel-daemon && $(MAKE)

@@ -1,14 +1,16 @@
-CC=gcc
-CFLAGS= -O3 -I../../include -D_REENTRANT
-LDFLAGS= -lpthread -li2c_dev -lm -lc -ltools -D_REENTRANT
-EXEC=motor_api_daemon_test
+CFLAGS= $(DCFLAGS)
+LDFLAGS= $(DLDFLAGS) -lpthread -li2c_dev
+
+EXEC=motor_api_daemon
+
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
-INSTALL_PATH = /bin
+
 
 all: $(EXEC)
+	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
-motor_api_daemon_test: $(OBJ)
+motor_api_daemon: $(OBJ)
 	@echo $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 	@echo "****END***"
@@ -19,7 +21,7 @@ motor_api_daemon_test: $(OBJ)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
-	cp $(EXEC) $(INSTALL_PATH)
+	cp $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC) $(INSTALL_PATH)
 
 remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
@@ -28,7 +30,7 @@ clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(EXEC)
+	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove

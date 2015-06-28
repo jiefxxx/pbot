@@ -1,12 +1,14 @@
-CC=gcc
-CFLAGS= -Wall -O3 -fPIC -I../../include
-LDFLAGS= -lc
+CFLAGS= $(LCFLAGS)
+LDFLAGS= $(LLDFLAGS)
+
 EXEC=libtools.so
+
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
-INSTALL_PATH = /lib
+
 
 all: $(EXEC)
+	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 libtools.so: $(OBJ)
 	@echo $@
@@ -17,20 +19,17 @@ libtools.so: $(OBJ)
 	@echo $@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: clean mrproper
-
 install:
-	cp $(EXEC) $(INSTALL_PATH)
+	cp $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC) $(INSTALL_PATH)
 
 remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
-	ldconfig
 
 clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(EXEC)
+	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove

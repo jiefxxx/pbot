@@ -1,12 +1,13 @@
-CC=gcc
-CFLAGS= -O3 -I../../include -D_REENTRANT
-LDFLAGS= -lpthread -li2c_dev -lm -lc -ltools -D_REENTRANT
+CFLAGS= $(DCFLAGS)
+LDFLAGS= $(DLDFLAGS) -lpthread -li2c_dev
 EXEC=magn_api_daemon
+
 SRC = $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
-INSTALL_PATH = /bin
+
 
 all: $(EXEC)
+	@mv $(EXEC) $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 magn_api_daemon: $(OBJ)
 	@echo $@
@@ -18,7 +19,7 @@ magn_api_daemon: $(OBJ)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
-	cp $(EXEC) $(INSTALL_PATH)
+	cp $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC) $(INSTALL_PATH)
 
 remove:
 	rm -rf $(INSTALL_PATH)/$(EXEC)
@@ -27,7 +28,7 @@ clean:
 	@rm -rf $(OBJ)
 
 mrproper: clean
-	@rm -rf $(EXEC)
+	@rm -rf $(ROOT_DIR)$(BUILD_DIR)$(INSTALL_PATH)/$(EXEC)
 
 
 .PHONY: clean mrproper install remove
