@@ -3,6 +3,11 @@
 
 #include <stdint.h>
 
+#define REQUEST_ACK 0x1
+#define REQUEST_RCV 0x2
+#define ACK 0x4
+#define RCV 0x8
+
 struct Base_proto{
   uint8_t type;
   uint8_t flags;

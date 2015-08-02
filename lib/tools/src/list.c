@@ -1,5 +1,5 @@
-compare #include<tools/list.h>
-struct List* init_list(){
+#include <tools/list.h>
+struct List* List_init(){
 	struct List* head = (struct List*)malloc(sizeof(struct List));
 	head->first = NULL;
 	head->last = NULL;
@@ -7,6 +7,18 @@ struct List* init_list(){
 	pthread_mutex_init(&head->mutex, NULL);
 	return head;
 }
+
+void List_free(struct List* list,void (*free_data)(void*)){
+	lock_list(list);
+  struct Node_list* tmp = get_first_node(list);
+  while(is_valid_node(tmp)){
+    (*free_data)(get_node_val(tmp));
+    del_node(list,tmp);
+    tmp = get_next_node(tmp);
+  }
+  unlock_list(list);
+}
+
 void* get_byID(struct List* list,int id){
 	int i = 0;
 	struct Node_list* tmp;
@@ -105,6 +117,33 @@ int is_last_node(struct Node_list* tmp){
 		return 1;
 	}
 	return 0;
+
+			tmp = get_next_node(tmp);
+		}
+	}
+	unlock_list(list);
+	return NULL;
+}
+
+int is_valid_node(struct Node_list* tmp){
+	if(tmp == NULL){
+		return 0;
+	}
+	return 1;
+}
+
+int is_first_node(struct Node_list* tmp){
+	if(tmp->prev == NULL){
+		return 1;
+	}
+	return 0;
+}
+
+int is_last_node(struct Node_list* tmp){
+	if(tmp->next == NULL){
+		return 1;
+	}
+	return 0;
 }
 
 void lock_list(struct List* list){
@@ -120,7 +159,7 @@ struct Node_list* get_first_node(struct List* list){
 }
 
 struct Node_list* get_last_node(struct List* list){
-	return tmp->next;
+	return list->last;
 }
 
 struct Node_list* get_prev_node(struct Node_list* tmp){
@@ -141,12 +180,6 @@ struct Node_list* make_node(void* el){
 	newNode->next = NULL;
 	newNode->prev = NULL;
 	return newNode;
-}
-
-void* free_node(struct Node_list* tmp){
-	void* ret = get_node_val(tmp);
-	free(tmp);
-	return ret;
 }
 
 void add_node_top(struct List* list, struct Node_list* newNode, struct Node_list* next){
@@ -199,6 +232,7 @@ void add_node_bot(struct List* list, struct Node_list* newNode, struct Node_list
 	list->count++;
 }
 
+
 void del_node(struct List* list,struct Node_list* tmp){
 	if(tmp->prev == NULL){
 		if(tmp->next == NULL){
@@ -221,4 +255,5 @@ void del_node(struct List* list,struct Node_list* tmp){
 		}
 	}
 	list->count--;
+	free(tmp);
 }

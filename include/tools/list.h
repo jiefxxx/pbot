@@ -16,7 +16,8 @@ struct Node_list{
 	struct Node_list* next;
 };
 
-struct List* init_list();
+struct List* List_init();
+void List_free(struct List*,void (*free_data)(void*));
 //high level
 void* get_byID(struct List* list,int id);
 void push_onTop(struct List* list,void* val);
@@ -36,7 +37,6 @@ struct Node_list* get_prev_node(struct Node_list* tmp);
 struct Node_list* get_next_node(struct Node_list* tmp);
 void* get_node_val(struct Node_list* tmp);
 struct Node_list* make_node(void* el);
-void* free_node(struct Node_list* tmp);
 void add_node_top(struct List* list, struct Node_list* newNode, struct Node_list* next);
 void add_node_bot(struct List* list, struct Node_list* newNode, struct Node_list* prev);
 void del_node(struct List* list,struct Node_list* tmp);
